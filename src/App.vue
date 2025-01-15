@@ -1,47 +1,44 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="container">
+    <header class="mb-4">
+      <h1>Car Rental Service</h1>
+    </header>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <button @click="showNewCarForm = !showNewCarForm" class="btn btn-primary mb-3">
+          {{ showNewCarForm ? 'Hide New Car Form' : 'Show New Car Form' }}
+        </button>
+        <new-car v-if="showNewCarForm" />
+      </div>
+      <div class="col-md-6 mb-4">
+        <new-rent />
+      </div>
     </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <show-rents />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import NewCar from "./components/newCar.vue";
+import NewRent from "./components/newRent.vue";
+import ShowRents from "./components/showRents.vue";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+export default {
+  components: {
+    NewCar,
+    NewRent,
+    ShowRents,
+  },
+  data() {
+    return {
+      showNewCarForm: false,
+    };
+  },
+};
+</script>
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+.container {
+  margin-top: 20px;
 }
 </style>
